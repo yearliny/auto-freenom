@@ -2,10 +2,43 @@
 
 一个 freenom 域名管理工具，用于自动续期快要过期的域名。目前是写了两个类工具可以方便的管理 Freenom 中的域名，有着 cookies 持久化、日志管理等功能。
 
-## 使用方法
+## Usage
 
+### Manual Run
+```bash
+# clone auto-freenom
+git clone https://github.com/yearliny/auto-freenom.git
+cd auto-freenom
 
+# init venv and install dependencies
+python3 -m venv venv
+source ./venv/activate
+pip install -r requirements.txt
 
+# setup freenom username and password
+cp config.example.ini config.ini
+vim config.ini
+
+# and run
+chmod +x main.py
+python3 main.py
+```
+
+### Run With Crontab
+
+这里提供一个参考方法每天运行一次任务，检查是否存在待更新的域名并自动更新。首先编辑 `main.py` 指定脚本解释器路径为 Python 虚拟环境，然后按常规方式添加定时任务即可。
+
+在 `main.py` 第一行添加如下内容，`/path/to/auto-freenom` 为你克隆的项目路径。
+```python
+#!/path/to/auto-freenom/venv/bin/python3
+```
+
+执行 `crontab -e` 命令，添加如下内容：
+```bash
+30 1 */1 * * /path/to/auto-freenom/main.py >> /path/to/auto-freenom/runtime.log
+```
+
+Okay，大功告成！
 
 ## Example
 
