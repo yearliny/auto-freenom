@@ -23,6 +23,9 @@ class Freenom:
 
     __RENEW_DOMAIN_URL = 'https://my.freenom.com/domains.php?submitrenewals=true'
 
+    # 最小提前续期天数
+    __MINIMUM_ADVANCE_RENEWAL = 14
+
     __COOKIES_NAME = 'cookies.pickle'
 
     def __init__(self, username, password, **kwargs):
@@ -148,7 +151,7 @@ class Freenom:
         return False
 
     def renew_all(self):
-        ready_domain = [d for d in self.domain_list if d.available_days < 15]
+        ready_domain = [item for item in self.domain_list if item.available_days <= Freenom.__MINIMUM_ADVANCE_RENEWAL]
         success_count = 0
         if len(ready_domain) < 1:
             logging.info('当前没有可续期的域名，续期操作终止。')

@@ -26,16 +26,11 @@ python3 main.py
 
 ### Run With Crontab
 
-这里提供一个参考方法每天运行一次任务，检查是否存在待更新的域名并自动更新。首先编辑 `main.py` 指定脚本解释器路径为 Python 虚拟环境，然后按常规方式添加定时任务即可。
-
-在 `main.py` 第一行添加如下内容，`/path/to/auto-freenom` 为你克隆的项目路径。
-```python
-#!/path/to/auto-freenom/venv/bin/python3
-```
+这里提供一个参考方法每天运行一次任务，检查是否存在待更新的域名并自动更新：
 
 执行 `crontab -e` 命令，添加如下内容：
 ```bash
-30 1 */1 * * /path/to/auto-freenom/main.py >> /path/to/auto-freenom/runtime.log
+30 1 */1 * * cd /path/to/auto-freenom; ./venv/bin/python3 main.py >> runtime.log
 ```
 
 Okay，大功告成！
