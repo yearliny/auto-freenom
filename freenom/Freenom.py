@@ -53,8 +53,8 @@ class Freenom:
         }
         self.session = requests.session()
         self.session.headers = self.headers
-        # 每页多少条域名
-        self.session.cookies.setdefault('WHMCSItemsPerPage', '100')
+        # 每页多少条域名 WHMCSItemsPerPage=-1， -1 为 Unlimited
+        self.session.cookies.setdefault('WHMCSItemsPerPage', '-1')
 
         # cookies setup
         if os.path.isfile(Freenom.__COOKIES_NAME):
