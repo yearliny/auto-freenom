@@ -95,6 +95,7 @@ class Freenom:
                 type=item.select_one('td.sixth').string
             )
             self.domain_list.append(freedom_domain)
+            logging.debug('成功载入域名【%s】', freedom_domain.domain_name)
 
             # sort by domain.available_days
             self.domain_list.sort(key=lambda domain: domain.available_days)
@@ -161,5 +162,5 @@ class Freenom:
         for domain in ready_domain:
             if self.renew_one(domain):
                 success_count += 1
-        logging.info('续期操作结束，成功续期 {} 个域名！'.format(len(ready_domain), success_count))
+        logging.info('续期操作结束，成功续期 {} 个域名！'.format(success_count))
         return success_count
